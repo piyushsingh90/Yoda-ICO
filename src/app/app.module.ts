@@ -15,6 +15,8 @@ import { LoginComponent } from './login/login.component';
 import { ManageComponent } from './admin/manage/manage.component';
 import { AuthService } from './auth.service';
 import { AuthGuardService } from './auth-guard.service';
+import { UserService } from './user.service';
+import { AdminAuthGuardService } from './admin-auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -33,14 +35,16 @@ import { AuthGuardService } from './auth-guard.service';
     NgbModule.forRoot(),
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
-      {path: 'wallet', component: WalletComponent},
+      {path: 'wallet', component: WalletComponent, canActivate: [AuthGuardService]},
       {path: 'login', component: LoginComponent},
-      {path: 'admin/manage', component: ManageComponent, canActivate: [AuthGuardService]}
+      {path: 'admin/manage', component: ManageComponent, canActivate: [AdminAuthGuardService]}
     ])
   ],
   providers: [
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    UserService,
+    AdminAuthGuardService
   ],
   bootstrap: [AppComponent]
 })
