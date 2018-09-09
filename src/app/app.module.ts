@@ -13,6 +13,8 @@ import { HomeComponent } from './home/home.component';
 import { WalletComponent } from './wallet/wallet.component';
 import { LoginComponent } from './login/login.component';
 import { ManageComponent } from './admin/manage/manage.component';
+import { AuthService } from './auth.service';
+import { AuthGuardService } from './auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -33,10 +35,13 @@ import { ManageComponent } from './admin/manage/manage.component';
       {path: '', component: HomeComponent},
       {path: 'wallet', component: WalletComponent},
       {path: 'login', component: LoginComponent},
-      {path: 'admin/manage', component: ManageComponent}
+      {path: 'admin/manage', component: ManageComponent, canActivate: [AuthGuardService]}
     ])
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    AuthGuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

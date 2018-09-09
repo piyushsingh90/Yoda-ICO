@@ -3,16 +3,19 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
+  <ng-template #anonymousUser>
+    <li class="nav-item active">
+      <a class="nav-link" routerLink="/login">Login</a>
+    </li>
+  </ng-template>
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
-      
-      <li ngbDropdown class="nav-item dropdown">
-        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Username</a>
+      <li *ngIf="auth.user$ | async as user; else anonymousUser" ngbDropdown class="nav-item dropdown">
+        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.displayName}}</a>
         <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
           <a class="dropdown-item" routerLink="/wallet">Wallet</a>
           <a class="dropdown-item" routerLink="admin/manage">Manage</a>
-          <a class="dropdown-item" >Logout</a>
+          <a class="dropdown-item" (click)="logout()" >Logout</a>
         </div>
       </li>
     </ul>
