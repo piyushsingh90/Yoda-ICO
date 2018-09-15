@@ -17,6 +17,8 @@ import { AuthService } from './auth.service';
 import { AuthGuardService } from './auth-guard.service';
 import { UserService } from './user.service';
 import { AdminAuthGuardService } from './admin-auth-guard.service';
+import { ProfileComponent } from './profile/profile.component';
+import { VerifyComponent } from './admin/verify/verify.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { AdminAuthGuardService } from './admin-auth-guard.service';
     HomeComponent,
     WalletComponent,
     LoginComponent,
-    ManageComponent
+    ManageComponent,
+    ProfileComponent,
+    VerifyComponent
   ],
   imports: [
     BrowserModule,
@@ -35,8 +39,10 @@ import { AdminAuthGuardService } from './admin-auth-guard.service';
     NgbModule.forRoot(),
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
+      {path: 'profile', component: ProfileComponent},
       {path: 'wallet', component: WalletComponent, canActivate: [AuthGuardService]},
       {path: 'login', component: LoginComponent},
+      {path: 'admin/verify/:id', component: VerifyComponent, canActivate: [AdminAuthGuardService]},
       {path: 'admin/manage', component: ManageComponent, canActivate: [AdminAuthGuardService]}
     ])
   ],

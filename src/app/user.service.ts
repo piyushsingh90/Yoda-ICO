@@ -19,4 +19,8 @@ export class UserService {
     return this.db.object('/users/' + uid);
   }
 
+  getAll() {
+    return this.db.list('/users');
+  }
+
 }
