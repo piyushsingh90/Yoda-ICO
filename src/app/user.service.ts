@@ -23,4 +23,10 @@ export class UserService {
     return this.db.list('/users');
   }
 
+  update(userId, user) {
+    return this.db.object('/users/' + userId).update(user);
+  }
+
+
+
 }
