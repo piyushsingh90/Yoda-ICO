@@ -16,7 +16,7 @@ import { CountryService } from '../country.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
   user = {};
   id;
   countries$;
@@ -30,10 +30,7 @@ export class ProfileComponent implements OnInit {
     this.countries$ = this.countryService.getCountries();
   }
 
-  ngOnInit() {
-  }
-
-  save(user) {
+  update(user) {
     if (this.id) {
       this.userService.update(this.id, user);
     } else {
