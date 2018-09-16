@@ -1,15 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-wallet',
   templateUrl: './wallet.component.html',
   styleUrls: ['./wallet.component.css']
 })
-export class WalletComponent implements OnInit {
+export class WalletComponent {
+  user = {};
+  id;
 
-  constructor() { }
+  constructor(private router: Router,
+    private route: ActivatedRoute,
+    private userService: UserService) {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.userService.get(this.id).take(1).subscribe(u => this.user = u);
+  }
 
-  ngOnInit() {
+  update(user) {
+    if (this.id) {
+      this.userService.update(this.id, user);
+    } else {
+      this.userService.save(user);
+    }
   }
 
 }

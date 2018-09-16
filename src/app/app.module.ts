@@ -42,8 +42,8 @@ import { CountryService } from './country.service';
     NgbModule.forRoot(),
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
-      {path: 'profile/:id', component: ProfileComponent},
-      {path: 'wallet', component: WalletComponent, canActivate: [AuthGuardService]},
+      {path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuardService]},
+      {path: 'wallet/:id', component: WalletComponent, canActivate: [AuthGuardService]},
       {path: 'login', component: LoginComponent},
       {path: 'admin/verify/:id', component: VerifyComponent, canActivate: [AdminAuthGuardService]},
       {path: 'admin/manage', component: ManageComponent, canActivate: [AdminAuthGuardService]}
