@@ -31,8 +31,4 @@ export class VerifyComponent implements OnInit {
     }
   }
 
-  update(productId, product) {
-
-  }
-
 }

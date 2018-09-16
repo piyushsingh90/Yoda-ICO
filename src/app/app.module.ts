@@ -20,6 +20,7 @@ import { UserService } from './user.service';
 import { AdminAuthGuardService } from './admin-auth-guard.service';
 import { ProfileComponent } from './profile/profile.component';
 import { VerifyComponent } from './admin/verify/verify.component';
+import { CountryService } from './country.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { VerifyComponent } from './admin/verify/verify.component';
     NgbModule.forRoot(),
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
-      {path: 'profile', component: ProfileComponent},
+      {path: 'profile/:id', component: ProfileComponent},
       {path: 'wallet', component: WalletComponent, canActivate: [AuthGuardService]},
       {path: 'login', component: LoginComponent},
       {path: 'admin/verify/:id', component: VerifyComponent, canActivate: [AdminAuthGuardService]},
@@ -52,7 +53,8 @@ import { VerifyComponent } from './admin/verify/verify.component';
     AuthService,
     AuthGuardService,
     UserService,
-    AdminAuthGuardService
+    AdminAuthGuardService,
+    CountryService
   ],
   bootstrap: [AppComponent]
 })
