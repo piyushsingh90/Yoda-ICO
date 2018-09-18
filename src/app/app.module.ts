@@ -21,6 +21,7 @@ import { AdminAuthGuardService } from './admin-auth-guard.service';
 import { ProfileComponent } from './profile/profile.component';
 import { VerifyComponent } from './admin/verify/verify.component';
 import { CountryService } from './country.service';
+import { WhitelistComponent } from './whitelist/whitelist.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CountryService } from './country.service';
     LoginComponent,
     ManageComponent,
     ProfileComponent,
-    VerifyComponent
+    VerifyComponent,
+    WhitelistComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +46,7 @@ import { CountryService } from './country.service';
       {path: '', component: HomeComponent},
       {path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuardService]},
       {path: 'wallet/:id', component: WalletComponent, canActivate: [AuthGuardService]},
+      {path: 'whitelist/:id', component: WhitelistComponent, canActivate: [AuthGuardService]},
       {path: 'login', component: LoginComponent},
       {path: 'admin/verify/:id', component: VerifyComponent, canActivate: [AdminAuthGuardService]},
       {path: 'admin/manage', component: ManageComponent, canActivate: [AdminAuthGuardService]}
