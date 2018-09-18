@@ -20,10 +20,15 @@ export class AuthService {
     this.user$ = afAuth.authState;
    }
 
-  login() {
+  loginWithGoogle() {
     const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
     localStorage.setItem('returnUrl', returnUrl);
     this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+  }
+
+  login(email, password) {
+    const credential = firebase.auth.EmailAuthProvider.credential( email, password );
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
   logout() {
