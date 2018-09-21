@@ -11,7 +11,9 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li *ngIf="appUser; else anonymousUser" ngbDropdown class="nav-item dropdown">
-        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{appUser.name}}</a>
+        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{appUser.email}}
+        </a>
         <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
           <a class="dropdown-item" [routerLink]="['/profile/', appUser.$key]">Profile</a>
           <a class="dropdown-item" [routerLink]="['/wallet/', appUser.$key]">Wallet</a>

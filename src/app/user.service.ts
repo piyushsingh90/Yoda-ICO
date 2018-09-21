@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase';
 import { AppUser } from './models/app-user';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Injectable()
 export class UserService {
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth) { }
 
   save(user: firebase.User) {
     this.db.object('/users/' + user.uid).update({
@@ -26,7 +27,5 @@ export class UserService {
   update(userId, user) {
     return this.db.object('/users/' + userId).update(user);
   }
-
-
 
 }

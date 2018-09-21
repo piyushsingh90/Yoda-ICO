@@ -11,6 +11,9 @@ import 'rxjs/add/operator/switchMap';
 @Injectable()
 export class AuthService {
   user$: Observable<firebase.User>;
+  appUser= {};
+
+  authState: any = null;
 
   constructor(
     private userService: UserService,
@@ -18,6 +21,10 @@ export class AuthService {
     private route: ActivatedRoute,
     private router: Router) {
     this.user$ = afAuth.authState;
+
+    this.afAuth.authState.subscribe((auth) => {
+      this.authState = auth;
+    });
    }
 
   loginWithGoogle() {
@@ -26,9 +33,20 @@ export class AuthService {
     this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
   }
 
-  login(email, password) {
-    const credential = firebase.auth.EmailAuthProvider.credential( email, password );
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
+  login2(email, password) {
+     this.afAuth.auth.signInWithEmailAndPassword(email, password);
+  }
+
+  login(email: string, password: string) {
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        console.log(user);
+        this.authState = user;
+      })
+      .catch(error => {
+        console.log(error);
+        throw error;
+      });
   }
 
   logout() {
@@ -45,6 +63,41 @@ export class AuthService {
         return Observable.of(null);
 
       });
+  }
+
+  emailSignUp2(email: string, password: string) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+      .then(user => {
+        // return this.userService.update(user.uid, user);
+       //  this.router.navigate(['/profile/' + user.uid]);
+      })
+      .catch(error => console.log(error));
+  }
+
+  emailSignUp(email: string, password: string) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+      .then((user) => {
+        this.authState = user;
+        this.sendVerificationEmail();
+      })
+      .catch(error => {
+        console.log(error);
+        throw error;
+      });
+  }
+
+  sendVerificationEmail() {
+    const user = firebase.auth().currentUser;
+    user.sendEmailVerification().then(function() {
+      console.log('Email sent');
+    }).catch(function(error) {
+      console.log('Error while sending Email');
+    });
+
+  }
+
+  getCurrentUser() {
+    return firebase.auth().currentUser;
   }
 
 }

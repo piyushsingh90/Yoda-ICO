@@ -20,18 +20,23 @@ export class ProfileComponent {
   user = {};
   id;
   countries$;
+  currentUser = {};
 
   constructor(private router: Router,
     private route: ActivatedRoute,
     private userService: UserService,
-    private countryService: CountryService) {
+    private countryService: CountryService,
+    private authService: AuthService) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.userService.get(this.id).take(1).subscribe(u => this.user = u);
     this.countries$ = this.countryService.getCountries();
+    this.currentUser = this.authService.getCurrentUser();
+    console.log(this.currentUser);
   }
 
   update(user) {
     if (this.id) {
+      console.log(user);
       this.userService.update(this.id, user);
     } else {
       this.userService.save(user);
