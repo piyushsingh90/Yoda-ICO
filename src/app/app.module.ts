@@ -22,6 +22,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { VerifyComponent } from './admin/verify/verify.component';
 import { CountryService } from './country.service';
 import { WhitelistComponent } from './whitelist/whitelist.component';
+import { AlertComponent } from './alert/alert.component';
+import { AlertService } from './alert.service';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,9 @@ import { WhitelistComponent } from './whitelist/whitelist.component';
     ManageComponent,
     ProfileComponent,
     VerifyComponent,
-    WhitelistComponent
+    WhitelistComponent,
+    AlertComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +53,7 @@ import { WhitelistComponent } from './whitelist/whitelist.component';
       {path: 'wallet/:id', component: WalletComponent, canActivate: [AuthGuardService]},
       {path: 'whitelist/:id', component: WhitelistComponent, canActivate: [AuthGuardService]},
       {path: 'login', component: LoginComponent},
+      {path: 'signup', component: SignupComponent},
       {path: 'admin/verify/:id', component: VerifyComponent, canActivate: [AdminAuthGuardService]},
       {path: 'admin/manage', component: ManageComponent, canActivate: [AdminAuthGuardService]}
     ])
@@ -57,7 +63,8 @@ import { WhitelistComponent } from './whitelist/whitelist.component';
     AuthGuardService,
     UserService,
     AdminAuthGuardService,
-    CountryService
+    CountryService,
+    AlertService
   ],
   bootstrap: [AppComponent]
 })

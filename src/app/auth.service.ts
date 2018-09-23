@@ -7,6 +7,7 @@ import { AppUser } from './models/app-user';
 import { UserService } from './user.service';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/switchMap';
+import { AlertService } from './alert.service';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +20,8 @@ export class AuthService {
     private userService: UserService,
     private afAuth: AngularFireAuth,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private alertService: AlertService) {
     this.user$ = afAuth.authState;
 
     this.afAuth.authState.subscribe((auth) => {
@@ -79,10 +81,10 @@ export class AuthService {
       .then((user) => {
         this.authState = user;
         this.sendVerificationEmail();
+        this.alertService.success('You have signed-up successfully. Please verify your email id');
       })
       .catch(error => {
-        console.log(error);
-        throw error;
+        this.alertService.error(error.message);
       });
   }
 

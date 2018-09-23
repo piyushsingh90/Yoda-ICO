@@ -10,6 +10,7 @@ import 'rxjs/add/operator/switchMap';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Subscription } from 'rxjs/Subscription';
 import { CountryService } from '../country.service';
+import { AlertService } from '../alert.service';
 
 @Component({
   selector: 'app-profile',
@@ -26,7 +27,8 @@ export class ProfileComponent {
     private route: ActivatedRoute,
     private userService: UserService,
     private countryService: CountryService,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private alertService: AlertService) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.userService.get(this.id).take(1).subscribe(u => this.user = u);
     this.countries$ = this.countryService.getCountries();
@@ -38,6 +40,7 @@ export class ProfileComponent {
     if (this.id) {
       console.log(user);
       this.userService.update(this.id, user);
+      this.alertService.success('Updated');
     } else {
       this.userService.save(user);
     }
