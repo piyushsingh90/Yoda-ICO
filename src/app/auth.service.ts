@@ -81,7 +81,7 @@ export class AuthService {
       .then((user) => {
         this.authState = user;
         this.sendVerificationEmail();
-        this.alertService.success('You have signed-up successfully. Please verify your email id');
+        this.alertService.success('You have signed-up successfully. Please verify your email id', true);
       })
       .catch(error => {
         this.alertService.error(error.message);

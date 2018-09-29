@@ -8,14 +8,17 @@
       <ul class="nav navbar-nav navbar-right">
       <ng-template #anonymousUser>
         <li class="nav-item active">
-          <a class="nav-link" routerLink="/login">Login</a>
+          <a class="nav-link" routerLink="/login">
+            Login</a>
         </li>
         <li class="nav-item active">
-            <a class="nav-link" routerLink="/signup">Sign Up</a>
+            <a class="nav-link" routerLink="/signup">
+              Sign Up</a>
         </li>
       </ng-template>
         <li class="nav-item active">
-          <a class="nav-link" href="http://staging.myreputationscore.io/staging#about" target="_blank">About Yoda</a>
+          <a class="nav-link" href="http://staging.myreputationscore.io/staging#about" target="_blank">
+            About Yoda</a>
         </li>
         <li *ngIf="appUser; else anonymousUser" ngbDropdown class="nav-item dropdown">
           <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
