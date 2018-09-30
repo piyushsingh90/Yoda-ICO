@@ -33,12 +33,10 @@ export class ProfileComponent {
     this.userService.get(this.id).take(1).subscribe(u => this.user = u);
     this.countries$ = this.countryService.getCountries();
     this.currentUser = this.authService.getCurrentUser();
-    console.log(this.currentUser);
   }
 
   update(user) {
     if (this.id) {
-      console.log(user);
       this.userService.update(this.id, user);
       this.alertService.success('Updated');
     } else {

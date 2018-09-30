@@ -42,12 +42,11 @@ export class AuthService {
   login(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((user) => {
-        console.log(user);
         this.authState = user;
+        this.router.navigate(['/profile/' + user.uid]);
       })
       .catch(error => {
-        console.log(error);
-        throw error;
+        this.alertService.error(error.message, false);
       });
   }
 
@@ -81,7 +80,8 @@ export class AuthService {
       .then((user) => {
         this.authState = user;
         this.sendVerificationEmail();
-        this.alertService.success('You have signed-up successfully. Please verify your email id', true);
+        this.router.navigate(['/profile/' + user.uid]);
+        this.alertService.success('You have signed-up successfully. Please Update your profile', true);
       })
       .catch(error => {
         this.alertService.error(error.message);

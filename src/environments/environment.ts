@@ -10,7 +10,7 @@ export const environment = {
     authDomain: 'yoda-a45a5.firebaseapp.com',
     databaseURL: 'https://yoda-a45a5.firebaseio.com',
     projectId: 'yoda-a45a5',
-    storageBucket: '',
+    storageBucket: 'yoda-a45a5.appspot.com',
     messagingSenderId: '600602688855'
   }
 };

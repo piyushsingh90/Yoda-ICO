@@ -25,6 +25,8 @@ import { WhitelistComponent } from './whitelist/whitelist.component';
 import { AlertComponent } from './alert/alert.component';
 import { AlertService } from './alert.service';
 import { SignupComponent } from './signup/signup.component';
+import { IdentityService } from './identity.service';
+import { UploadService } from './upload.service';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { SignupComponent } from './signup/signup.component';
     UserService,
     AdminAuthGuardService,
     CountryService,
-    AlertService
+    AlertService,
+    IdentityService,
+    UploadService
   ],
   bootstrap: [AppComponent]
 })
