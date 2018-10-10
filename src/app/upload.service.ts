@@ -12,9 +12,9 @@ export class UploadService {
   private basePath = '/uploads';
   private uploadTask: firebase.storage.UploadTask;
 
-  pushUpload(upload: Upload) {
+  pushUpload(upload: Upload, id: string) {
     const storageRef = firebase.storage().ref();
-    this.uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
+    this.uploadTask = storageRef.child(`${this.basePath}/${id}`).put(upload.file);
 
     this.uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       (error) => {

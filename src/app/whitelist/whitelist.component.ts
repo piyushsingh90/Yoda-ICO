@@ -49,7 +49,7 @@ export class WhitelistComponent {
   upload() {
     const file = this.selectedFiles.item(0);
     this.currentUpload = new Upload(file);
-    this.uploadService.pushUpload(this.currentUpload);
+    this.uploadService.pushUpload(this.currentUpload, this.id);
   }
 
 
