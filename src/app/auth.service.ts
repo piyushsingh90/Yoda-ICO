@@ -35,10 +35,6 @@ export class AuthService {
     this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
   }
 
-  login2(email, password) {
-     this.afAuth.auth.signInWithEmailAndPassword(email, password);
-  }
-
   login(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((user) => {
@@ -66,36 +62,22 @@ export class AuthService {
       });
   }
 
-  emailSignUp2(email: string, password: string) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-      .then(user => {
-        // return this.userService.update(user.uid, user);
-       //  this.router.navigate(['/profile/' + user.uid]);
-      })
-      .catch(error => console.log(error));
-  }
-
   emailSignUp(email: string, password: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
         this.authState = user;
-        this.sendVerificationEmail();
-        this.router.navigate(['/profile/' + user.uid]);
-        this.alertService.success('You have signed-up successfully. Please Update your profile', true);
-      })
+        const currentUser = firebase.auth().currentUser;
+        const that = this;
+        currentUser.sendEmailVerification().then(function() {
+          that.router.navigate(['/profile/' + user.uid]);
+          that.alertService.success('You have signed-up successfully. Please Update your profile', true);
+        }).catch(function(error) {
+          console.log('Error while sending Email', error);
+        });
+        })
       .catch(error => {
         this.alertService.error(error.message);
       });
-  }
-
-  sendVerificationEmail() {
-    const user = firebase.auth().currentUser;
-    user.sendEmailVerification().then(function() {
-      console.log('Email sent');
-    }).catch(function(error) {
-      console.log('Error while sending Email');
-    });
-
   }
 
   getCurrentUser() {
