@@ -1,0 +1,11 @@
+<div class="list-group" *ngIf="appUser; else anonymousUser">
+   
+    <a href="#" class="list-group-item" [routerLink]="['/profile/', appUser.$key]"><i class="fa fa-user"></i> <span>Profile</span></a>
+    <a href="#" class="list-group-item" [routerLink]="['/wallet/', appUser.$key]"><i class="fa fa-money"></i> <span>Wallet</span></a>
+    <a href="#" class="list-group-item" [routerLink]="['/whitelist/', appUser.$key]"><i class="fa fa-check"></i> <span>Whitelist</span></a>
+    <ng-container *ngIf="appUser.isAdmin">
+        <a href="#" class="list-group-item" routerLink="admin/manage"><i class="fa fa-wrench"></i> <span>Manage</span></a>
+    </ng-container>
+
+</div>
+

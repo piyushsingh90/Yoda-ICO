@@ -27,6 +27,7 @@ import { AlertService } from './alert.service';
 import { SignupComponent } from './signup/signup.component';
 import { IdentityService } from './identity.service';
 import { UploadService } from './upload.service';
+import { LeftMenuComponent } from './left-menu/left-menu.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { UploadService } from './upload.service';
     VerifyComponent,
     WhitelistComponent,
     AlertComponent,
-    SignupComponent
+    SignupComponent,
+    LeftMenuComponent
   ],
   imports: [
     BrowserModule,
