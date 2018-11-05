@@ -1,22 +1,26 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Admin</th>
-      <th>Verified</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr *ngFor="let user of users$ | async">
-        <td>{{user.name}}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.isAdmin}}</td>
-        <td>{{user.isVerified}}</td>
-        <td>
-          <a [routerLink]="['/admin/verify/', user.$key]">Verify</a>
-        </td>
-      </tr>
-  </tbody>
-</table>
+<div class="card" >
+    <div class="card-block"  style="margin:10px">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Admin</th>
+            <th>Verified</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users$ | async">
+              <td>{{user.name}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.isAdmin}}</td>
+              <td>{{user.isVerified}}</td>
+              <td>
+                <a [routerLink]="['/admin/verify/', user.$key]">Verify</a>
+              </td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

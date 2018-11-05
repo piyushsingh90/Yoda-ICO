@@ -1,29 +1,27 @@
-<div class="container" style="width:60%">
-  <div class="card" >
-        <div class="card-block"  style="margin:10px">
-          <form #f="ngForm" (ngSubmit)="update(f.value)">
-              <div class="form-group">
-                <label for="idType">ID Type</label>
-                <select [(ngModel)]="user.idType" class="form-control" id="idType" name="idType">
-                  <option></option>
-                  <option *ngFor="let i of identities$ | async" [value]="i.$key">
-                    {{i.name}}
-                  </option>
-                </select>
-              </div>
-            <div class="form-group">
-              <label for="idNumber">ID Number</label>
-              <input [(ngModel)]="user.idNumber" name="idNumber" id="idNumber" type="text" class="form-control" />
-            </div>
-            <div class="form-group">
-              <label for="exampleFormControlFile1">ID Upload</label>
-              <a *ngIf="user.idUrl" href="{{user.idUrl}}" class="badge badge-light">View</a>
-              <input type="file" class="form-control-file" id="exampleFormControlFile1" (change)="detectFiles($event)">
-            </div>
-            
-
-            <button type="submit" class="btn btn-primary">Update</button>
-          </form>
+<div class="card" >
+    <div class="card-block"  style="margin:10px">
+      <form #f="ngForm" (ngSubmit)="update(f.value)">
+          <div class="form-group">
+            <label for="idType">ID Type</label>
+            <select [(ngModel)]="user.idType" class="form-control" id="idType" name="idType">
+              <option></option>
+              <option *ngFor="let i of identities$ | async" [value]="i.$key">
+                {{i.name}}
+              </option>
+            </select>
+          </div>
+        <div class="form-group">
+          <label for="idNumber">ID Number</label>
+          <input [(ngModel)]="user.idNumber" name="idNumber" id="idNumber" type="text" class="form-control" />
         </div>
-      </div>
+        <div class="form-group">
+          <label for="exampleFormControlFile1">ID Upload</label>
+          <a *ngIf="user.idUrl" href="{{user.idUrl}}" class="badge badge-light">View</a>
+          <input type="file" class="form-control-file" id="exampleFormControlFile1" (change)="detectFiles($event)">
+        </div>
+        
+
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
     </div>
+  </div>
