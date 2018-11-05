@@ -18,7 +18,7 @@
         <select [(ngModel)]="user.country" class="form-control" id="country" name="country">
           <option></option>
           <option *ngFor="let c of countries$ | async" [value]="c.$key">
-            {{c.name}}
+            {{c.country}}
           </option>
         </select>
       </div>
