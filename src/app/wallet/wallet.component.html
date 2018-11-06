@@ -2,11 +2,11 @@
   <div class="card-block"  style="margin:10px">
     <form #f="ngForm" (ngSubmit)="update(f.value)">
       <div class="form-group">
-        <label for="name">Wallet Address</label>
-        <input #wallet="ngModel" [(ngModel)]="user.wallet" name="wallet" id="wallet" type="text" class="form-control" />
+        <label for="name">Wallet Address*</label>
+        <input #wallet="ngModel" [(ngModel)]="user.wallet" name="wallet" id="wallet" type="text" class="form-control" required/>
       </div>
       
-      <button type="submit" class="btn btn-primary">Update</button>
+      <button type="submit" class="btn btn-primary" [disabled]="f.form.invalid">Update</button>
     </form>
   </div>
 </div>
