@@ -22,6 +22,9 @@ export class ProfileComponent {
   id;
   countries$;
   currentUser = {};
+  today = new Date();
+  minDate = {year: 1900, month: 1, day: 1};
+  maxDate = {year: this.today.getUTCFullYear() - 18, month: this.today.getUTCMonth() + 1, day: this.today.getUTCDate()};
 
   constructor(private router: Router,
     private route: ActivatedRoute,
