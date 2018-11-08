@@ -3,30 +3,38 @@ import * as firebase from 'firebase';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import { Upload } from './models/upload';
 import { Observable } from 'rxjs/Observable';
+import { AlertService } from './alert.service';
 
 @Injectable()
 export class UploadService {
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase,
+    private alertService: AlertService) { }
 
   private basePath = '/uploads';
-  private uploadTask: firebase.storage.UploadTask;
+  private uploadTask;
 
   pushUpload(upload: Upload, id: string) {
     const storageRef = firebase.storage().ref();
     this.uploadTask = storageRef.child(`${this.basePath}/${id}`).put(upload.file);
+    const that = this;
 
-    this.uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-      (error) => {
-        console.log(error);
+    this.uploadTask.on('state_changed',
+      function(snapshot) {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        upload.progress = progress;
       },
-      () => {
-        upload.url = this.uploadTask.snapshot.downloadURL;
-        upload.name = upload.file.name;
-        this.saveFileData(upload);
+      function(error) {
+        this.alertService.error(error);
+      },
+      function() {
+        that.uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+          upload.url = downloadURL;
+          upload.name = upload.file.name;
+          that.saveFileData(upload);
+        });
       });
   }
-
   private saveFileData(upload: Upload) {
     this.db.list('/uploads').push(upload);
   }

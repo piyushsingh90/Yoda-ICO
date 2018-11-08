@@ -2,26 +2,35 @@
     <div class="card-block"  style="margin:10px">
       <form #f="ngForm" (ngSubmit)="update(f.value)">
           <div class="form-group">
-            <label for="idType">ID Type</label>
-            <select [(ngModel)]="user.idType" class="form-control" id="idType" name="idType">
+            <label for="idType">ID Type*</label>
+            <select [(ngModel)]="user.idType" class="form-control" id="idType" name="idType" required>
               <option></option>
               <option *ngFor="let i of identities$ | async" [value]="i.$key">
                 {{i.name}}
               </option>
             </select>
           </div>
+          <div class="form-group">
+            <label for="issued">ID Issued By*</label>
+            <input  #issuedBy="ngModel" [(ngModel)]="user.issuedBy" name="issuedBy" id="issued" type="text" class="form-control" required />
+          </div>
         <div class="form-group">
-          <label for="idNumber">ID Number</label>
-          <input [(ngModel)]="user.idNumber" name="idNumber" id="idNumber" type="text" class="form-control" />
+          <label for="idNumber">ID Number*</label>
+          <input [(ngModel)]="user.idNumber" name="idNumber" id="idNumber" type="text" class="form-control" required />
         </div>
         <div class="form-group">
-          <label for="exampleFormControlFile1">ID Upload</label>
+          <label for="upload">ID Upload</label>
+          <div *ngIf="currentUpload">
+            <div class="progress">
+              <div class="progress-bar" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width': currentUpload?.progress + '%'}"></div>
+            </div>
+          </div>
           <a *ngIf="user.idUrl" href="{{user.idUrl}}" class="badge badge-light">View</a>
-          <input type="file" class="form-control-file" id="exampleFormControlFile1" (change)="detectFiles($event)">
+          <input type="file" class="form-control-file" id="upload" (change)="detectFiles($event)" required>
         </div>
         
 
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary" [disabled]="f.form.invalid">Update</button>
       </form>
     </div>
   </div>
