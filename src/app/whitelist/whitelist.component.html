@@ -18,17 +18,20 @@
           <label for="idNumber">ID Number*</label>
           <input [(ngModel)]="user.idNumber" name="idNumber" id="idNumber" type="text" class="form-control" required />
         </div>
+        <div class="form-group" *ngIf="user.idUrl">
+          <label for="idNumber">ID Document</label>
+          <a *ngIf="user.idUrl" href="{{user.idUrl}}" class="badge badge-light">View</a>
+        </div>
         <div class="form-group">
-          <label for="upload">ID Upload</label>
+          <label *ngIf="user.idUrl" for="upload">Reupload ID </label>
+          <label *ngIf="!user.idUrl" for="upload">Upload ID</label>
           <div *ngIf="currentUpload">
             <div class="progress">
               <div class="progress-bar" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width': currentUpload?.progress + '%'}"></div>
             </div>
           </div>
-          <a *ngIf="user.idUrl" href="{{user.idUrl}}" class="badge badge-light">View</a>
-          <input type="file" class="form-control-file" id="upload" (change)="detectFiles($event)" required>
+          <input type="file" class="form-control-file" id="upload" (change)="detectFiles($event)">
         </div>
-        
 
         <button type="submit" class="btn btn-primary" [disabled]="f.form.invalid">Update</button>
       </form>

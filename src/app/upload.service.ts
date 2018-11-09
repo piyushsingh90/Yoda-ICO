@@ -31,20 +31,8 @@ export class UploadService {
         that.uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
           upload.url = downloadURL;
           upload.name = upload.file.name;
-          that.saveFileData(upload);
         });
       });
-  }
-  private saveFileData(upload: Upload) {
-    this.db.list('/uploads').push(upload);
-  }
-
-  public getBytesTransferred() {
-    return this.uploadTask.snapshot.bytesTransferred;
-  }
-
-  public getTotalBytes() {
-    return this.uploadTask.snapshot.totalBytes;
   }
 
   public getTask() {
