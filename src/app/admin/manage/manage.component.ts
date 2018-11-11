@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../user.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { UserService } from '../../user.service';
   templateUrl: './manage.component.html',
   styleUrls: ['./manage.component.css']
 })
-export class ManageComponent implements OnInit  {
+export class ManageComponent {
   users$;
   displayedColumns: string[] = ['userName', 'email', 'isVerified', 'verify'];
   dataSource;
@@ -14,8 +14,5 @@ export class ManageComponent implements OnInit  {
   constructor(private userService: UserService) {
     this.users$ = this.userService.getAll();
     this.dataSource = this.userService.getAll();
-  }
-
-  ngOnInit() {
   }
 }

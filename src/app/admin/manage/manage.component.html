@@ -1,25 +1,28 @@
-<mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
-
-    <ng-container matColumnDef="userName">
-      <mat-header-cell *matHeaderCellDef> User Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.userName}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="email">
-      <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="isVerified">
-      <mat-header-cell *matHeaderCellDef> Verified </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.isVerified}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="verify">
-      <mat-header-cell *matHeaderCellDef> Verify </mat-header-cell>
-      <mat-cell *matCellDef="let element"> <a [routerLink]="['/admin/verify/', element.$key]">Verify</a> </mat-cell>
-    </ng-container>
-  
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
+<div class="card" >
+    <div class="card-block"  style="margin:10px">
+        <div class="container">
+          <div class="table-responsive">          
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Verified</th>
+                  <th>User Name</th>
+                  <th>Email</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of users$ | async">
+                  <td>
+                        <i *ngIf="user.isVerified" class="fa fa-check-square"></i>
+                  </td> 
+                  <td>{{user.userName}}</td> 
+                  <td>{{user.email}}</td>
+                  <td><a [routerLink]="['/admin/verify/', user.$key]">View</a></td> 
+                </tr> 
+              </tbody>
+            </table>
+            </div>
+          </div>
+    </div>
+</div>

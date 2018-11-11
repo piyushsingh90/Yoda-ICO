@@ -29,7 +29,6 @@ import { IdentityService } from './identity.service';
 import { UploadService } from './upload.service';
 import { LeftMenuComponent } from './left-menu/left-menu.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MatTableModule } from '@angular/material';
 
 
 
@@ -65,8 +64,7 @@ import { MatTableModule } from '@angular/material';
       {path: 'admin/verify/:id', component: VerifyComponent, canActivate: [AdminAuthGuardService]},
       {path: 'admin/manage', component: ManageComponent, canActivate: [AdminAuthGuardService]}
     ]),
-    BrowserAnimationsModule,
-    MatTableModule
+    BrowserAnimationsModule
   ],
   providers: [
     AuthService,
