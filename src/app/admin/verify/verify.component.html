@@ -1,16 +1,52 @@
-<form #f="ngForm" (ngSubmit)="save(f.value)">
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input readonly  #name="ngModel" [(ngModel)]="user.name" name="name" id="name" type="text" class="form-control" />
-  </div>
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input readonly  #email="ngModel" [(ngModel)]="user.email" name="email" id="email" type="text" class="form-control" />
-  </div>
-  <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="isVerified" name="isVerified" 
-       [(ngModel)]="user.isVerified">
-      <label class="form-check-label" for="isVerified">Verify</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Save</button>
-</form>
+<div class="card" >
+    <div class="card-block"  style="margin:10px">
+      <form #f="ngForm" (ngSubmit)="save(f.value)">
+        <div class="form-group">
+          <label for="userName">User Name</label>
+          <input readonly  #userName="ngModel" [(ngModel)]="user.userName" name="userName" id="userName" type="text" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input readonly  #email="ngModel" [(ngModel)]="user.email" name="email" id="email" type="text" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="country">Country</label>
+          <input readonly  #country="ngModel" [(ngModel)]="user.country" name="country" id="country" type="text" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="dob">Date Of Birth</label>
+          <div class="input-group">
+            <input readonly class="form-control" name="dob" id="dob" [(ngModel)]="user.dob"  ngbDatepicker #d="ngbDatepicker">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="name">Wallet Address</label>
+          <input readonly #wallet="ngModel" [(ngModel)]="user.wallet" name="wallet" id="wallet" type="text" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label for="idType">ID Type</label>
+          <input readonly #idType="ngModel" [(ngModel)]="user.idType" name="idType" id="idType" type="text" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label for="issuedBy">ID Issued By</label>
+          <input readonly #issuedBy="ngModel" [(ngModel)]="user.issuedBy" name="issuedBy" id="issuedBy" type="text" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label for="idNumber">ID Number</label>
+          <input readonly #idNumber="ngModel" [(ngModel)]="user.idNumber" name="idNumber" id="idNumber" type="text" class="form-control"/>
+        </div>
+        <div class="form-group" *ngIf="user.idUrl">
+          <label for="idNumber">ID Document</label>
+          <a *ngIf="user.idUrl" href="{{user.idUrl}}" class="badge badge-light">View</a>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="isVerified" name="isVerified" 
+            [(ngModel)]="user.isVerified">
+            <label class="form-check-label" for="isVerified">Verify</label>
+        </div>
+      
+        <button type="submit" class="btn btn-primary">Save</button>
+      </form>
+    </div>
+</div>
