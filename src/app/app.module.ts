@@ -28,6 +28,10 @@ import { SignupComponent } from './signup/signup.component';
 import { IdentityService } from './identity.service';
 import { UploadService } from './upload.service';
 import { LeftMenuComponent } from './left-menu/left-menu.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, MatSortModule, MatTableModule } from '@angular/material';
+
+
 
 @NgModule({
   declarations: [
@@ -60,7 +64,13 @@ import { LeftMenuComponent } from './left-menu/left-menu.component';
       {path: 'signup', component: SignupComponent},
       {path: 'admin/verify/:id', component: VerifyComponent, canActivate: [AdminAuthGuardService]},
       {path: 'admin/manage', component: ManageComponent, canActivate: [AdminAuthGuardService]}
-    ])
+    ]),
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSortModule
   ],
   providers: [
     AuthService,

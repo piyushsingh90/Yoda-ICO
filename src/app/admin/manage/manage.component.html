@@ -1,26 +1,25 @@
-<div class="card" >
-    <div class="card-block"  style="margin:10px">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Admin</th>
-            <th>Verified</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let user of users$ | async">
-              <td>{{user.name}}</td>
-              <td>{{user.email}}</td>
-              <td>{{user.isAdmin}}</td>
-              <td>{{user.isVerified}}</td>
-              <td>
-                <a [routerLink]="['/admin/verify/', user.$key]">Verify</a>
-              </td>
-            </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+<mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="userName">
+      <mat-header-cell *matHeaderCellDef> User Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.userName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="isVerified">
+      <mat-header-cell *matHeaderCellDef> Verified </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.isVerified}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="verify">
+      <mat-header-cell *matHeaderCellDef> Verify </mat-header-cell>
+      <mat-cell *matCellDef="let element"> <a [routerLink]="['/admin/verify/', element.$key]">Verify</a> </mat-cell>
+    </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
